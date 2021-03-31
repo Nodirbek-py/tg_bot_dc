@@ -4,5 +4,9 @@ module.exports = {
     greeting2: "Hurmatli mijoz, o'zingiz haqingizda ba'zi bir ma'lumotlarni taqdim qilsangiz",
     name:"Ism-sharifingizni kiriting",
     date:"Tug'ilgan sanangizni kiritng",
-    phone:"Telefon raqamingizni kiriting"
+    phone:"Telefon raqamingizni kiriting",
+    addr:"Yashash joyingizni kiriting",
+    comp:"Shaxsiy kompyuteringiz bormi?",
+    lang:"Qaysi chet tilini bilasiz",
+    level:"Til(lar)ni bilishingizni qanday baholaysiz?"
 }
