@@ -10,34 +10,42 @@ const courseSelector = new Composer();
 
 
 courseSelector.action("front", (ctx) => {
+  ctx.answerCbQuery();
   ctx.wizard.state.data.course = "Web - Front";
   return ctx.wizard.next();
 });
 courseSelector.action("back", (ctx) => {
+  ctx.answerCbQuery();
   ctx.wizard.state.data.course = "Web - Back";
   return ctx.wizard.next();
 });
 courseSelector.action("py", (ctx) => {
+  ctx.answerCbQuery();
   ctx.wizard.state.data.course = "Python";
   return ctx.wizard.next();
 });
 courseSelector.action("android", (ctx) => {
+  ctx.answerCbQuery();
   ctx.wizard.state.data.course = "Mobil - Android";
   return ctx.wizard.next();
 });
 courseSelector.action("ios", (ctx) => {
+  ctx.answerCbQuery();
   ctx.wizard.state.data.course = "Mobil - iOS";
   return ctx.wizard.next();
 });
 courseSelector.action("3d", (ctx) => {
+  ctx.answerCbQuery();
   ctx.wizard.state.data.course = "Dizayn - 3D";
   return ctx.wizard.next();
 });
 courseSelector.action("graphic", (ctx) => {
+  ctx.answerCbQuery();
   ctx.wizard.state.data.course = "Dizayn - grafik";
   return ctx.wizard.next();
 });
 courseSelector.action("robot", (ctx) => {
+  ctx.answerCbQuery();
   ctx.wizard.state.data.course = "Robototexnka";
   return ctx.wizard.next();
 });
