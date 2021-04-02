@@ -29,7 +29,6 @@ const superWizard = new WizardScene(
   },
   ctx => {
     ctx.wizard.state.data.phone = ctx.message.text;
-    
     return ctx.scene.leave();
   }
 );
