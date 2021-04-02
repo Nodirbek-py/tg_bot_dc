@@ -3,11 +3,10 @@ const Telegraf = require("telegraf");
 const session = require("telegraf/session");
 const Stage = require("telegraf/stage");
 const WizardScene = require("telegraf/scenes/wizard");
+const { GoogleSpreadsheet } = require("google-spreadsheet");
 const { Router, Markup, Composer } = Telegraf;
 let data = {};
 const courseSelector = new Composer();
-
-
 
 courseSelector.action("front", (ctx) => {
   ctx.answerCbQuery();
@@ -49,8 +48,6 @@ courseSelector.action("robot", (ctx) => {
   ctx.wizard.state.data.course = "Robototexnka";
   return ctx.wizard.next();
 });
-
-
 
 const superWizard = new WizardScene(
   "super-wizard",
@@ -116,7 +113,7 @@ const superWizard = new WizardScene(
   (ctx) => {
     ctx.wizard.state.data.level = ctx.message.text;
     ctx.reply(
-    `
+      `
     𝗞𝘂𝗿𝘀𝗹𝗮𝗿 𝘁𝗼'𝗴'𝗿𝗶𝘀𝗶𝗱𝗮 𝗺𝗮'𝗹𝘂𝗺𝗼𝘁
     👇👇👇👇👇👇👇👇👇👇👇👇👇👇
 
@@ -156,16 +153,13 @@ const superWizard = new WizardScene(
         [
           Markup.callbackButton("🌐 Web (Front-end)", "front"),
           Markup.callbackButton("🌐 Web (Back-end)", "back"),
-          
         ],
-        [Markup.callbackButton("👨🏽‍💻 Python", "py"),],
+        [Markup.callbackButton("👨🏽‍💻 Python", "py")],
         [
           Markup.callbackButton("📱 Mobil (Android)", "android"),
           Markup.callbackButton("📱 Mobil (iOS)", "ios"),
         ],
-        [
-          Markup.callbackButton("🤖 Robototexnika", "robot")
-        ],
+        [Markup.callbackButton("🤖 Robototexnika", "robot")],
         [
           Markup.callbackButton("🏛️ 3D dizayn", "3d"),
           Markup.callbackButton("🖌️ Grafik dizayn", "graphic"),
@@ -175,8 +169,35 @@ const superWizard = new WizardScene(
     return ctx.wizard.next();
   },
   courseSelector,
-  (ctx) => {
+  async (ctx) => {
     console.log(ctx.wizard.state.data);
+    const doc = new GoogleSpreadsheet(config.spreadSheetID);
+    await doc.useServiceAccountAuth({
+      client_email: "nodirbekvositov98@gmail.com",
+      private_key: "n12182001v",
+    });
+    const sheet = await doc.addSheet({
+      headerValues: [
+        "FIO",
+        "Tug'ilgan sanasi",
+        "Tel. raqami",
+        "Manzil",
+        "Shaxsiy kompyuteri",
+        "Chet tili",
+        "Darajasi",
+        "Kurs",
+      ],
+    });
+    const row = await sheet.addRow({
+      FIO: ctx.wizard.state.data.name,
+      "Tu'gilgan sanai": ctx.wizard.state.data.date,
+      "Tel. raqami": ctx.wizard.state.phone,
+      Manzil: ctx.wizard.state.data.addr,
+      "Shaxsiy kompyuteri": ctx.wizard.state.data.comp,
+      "Chet tili": ctx.wizard.state.data.lang,
+      Darajasi: ctx.wizard.state.data.level,
+      Kurs: ctx.wizard.state.data.course,
+    });
     return ctx.scene.leave();
   }
 );

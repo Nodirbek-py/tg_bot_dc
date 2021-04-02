@@ -8,5 +8,7 @@ module.exports = {
     addr:"Yashash joyingizni kiriting",
     comp:"Shaxsiy kompyuteringiz bormi?",
     lang:"Qaysi chet tilini bilasiz",
-    level:"Til(lar)ni bilishingizni qanday baholaysiz?"
+    level:"Til(lar)ni bilishingizni qanday baholaysiz?",
+    spreadSheetID:"1lFHDpz9NMJsnFGIX0GsbSYPipyde8y6ZSjQpGwMEhIA",
+    sheetID:"0"
 }
